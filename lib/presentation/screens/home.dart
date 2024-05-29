@@ -65,16 +65,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                   ),
                   Text(
-                    'Trades',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight:
-                          currentTab == 2 ? FontWeight.bold : FontWeight.normal,
-                      fontSize: 16.0,
-                      color: currentTab == 2 ? Colors.black : unselectedColor,
-                    ),
-                  ),
-                  Text(
                     'Portfolio',
                     textAlign: TextAlign.center,
                     style: TextStyle(

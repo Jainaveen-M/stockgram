@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "933926952783",
+    "project_id": "stockgram-70916",
+    "storage_bucket": "stockgram-70916.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933926952783:android:7c8b62caeefc73dd93ef3a",
+        "android_client_info": {
+          "package_name": "com.jai.stockgram.stockgram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV_Btr98Gqy1nuZnayYKaMYUmCxRZcroM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
