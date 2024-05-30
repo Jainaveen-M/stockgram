@@ -59,8 +59,10 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
       for (String i in portfolio.keys) {
         Holdings h = Holdings.fromMap(portfolio[i]!);
-        totalInvested += double.parse(h.total);
-        overallPortFolio.add(h);
+        if (double.parse(h.qty) > 0) {
+          overallPortFolio.add(h);
+          totalInvested += double.parse(h.total);
+        }
       }
 
       emit(PortfolioLoaded(overallPortFolio, totalInvested));
