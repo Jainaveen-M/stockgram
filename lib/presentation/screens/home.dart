@@ -23,7 +23,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     currentTab = 0;
-    tabController = TabController(length: 3, vsync: this, initialIndex: 1);
+    tabController = TabController(length: 3, vsync: this, initialIndex: 0);
     super.initState();
   }
 
