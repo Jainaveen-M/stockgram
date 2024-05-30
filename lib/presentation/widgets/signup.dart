@@ -107,8 +107,8 @@ class _SignupWidgetState extends State<SignupWidget> {
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          height: 40,
-                          width: 140,
+                          height: 50,
+                          width: 120,
                           child: Center(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +133,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                   ),
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 50.0),
+                      padding: const EdgeInsets.only(bottom: 50.0, top: 50.0),
                       child: Text.rich(
                         TextSpan(
                           children: [
