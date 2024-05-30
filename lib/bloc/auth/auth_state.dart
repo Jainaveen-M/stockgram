@@ -19,3 +19,7 @@ class AuthLoginFailed extends AuthState {
     required this.message,
   });
 }
+
+class ShowSignupScreen extends AuthState {}
+
+class ShowLoginScreen extends AuthState {}
