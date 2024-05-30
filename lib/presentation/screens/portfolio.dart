@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:stockgram/data/models/order.dart';
 import 'package:stockgram/data/models/holding.dart';
-import 'package:stockgram/util/localstorage.dart';
+import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 class PortFolio extends StatefulWidget {
@@ -15,7 +15,7 @@ class PortFolio extends StatefulWidget {
 class _PortFolioState extends State<PortFolio> {
   getMessages() async {
     List<Order> portfolio = [];
-    var t = await serviceLocator<DatabaseHelper>().queryAllRows();
+    var t = await serviceLocator<TradeOrderDB>().queryAllRows();
     for (var i in t) {
       portfolio.add(Order.fromMap(i));
     }

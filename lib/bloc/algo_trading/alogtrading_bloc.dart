@@ -6,7 +6,7 @@ import 'package:stockgram/data/models/order.dart';
 import 'package:stockgram/data/repositary/stock_data.dart';
 import 'package:stockgram/socket/socket.dart';
 import 'package:stockgram/util/bot_trading.dart';
-import 'package:stockgram/util/localstorage.dart';
+import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 part 'alogtrading_event.dart';
@@ -21,7 +21,7 @@ class AlogtradingBloc extends Bloc<AlogtradingEvent, AlogtradingState> {
   FutureOr<void> getBotTrades(
       FetchBotTrades event, Emitter<AlogtradingState> emit) async {
     emit(AlogtradingLoading());
-    var t = await serviceLocator<BotDatabaseHelper>().queryAllRows();
+    var t = await serviceLocator<BotOrderDB>().queryAllRows();
     List<Order> order = [];
     for (var i in t) {
       order.add(Order.fromMap(i));

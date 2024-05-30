@@ -35,7 +35,7 @@ class _AlgoTradingState extends State<AlgoTrading> {
             CustomToast.showErroMessage("Unable to fetch bot orders");
           }
           if (state is BotOrderCreate) {
-            CustomToast.showErroMessage(state.message);
+            CustomToast.showSuccessMessage(state.message);
           }
         },
         builder: (context, state) {

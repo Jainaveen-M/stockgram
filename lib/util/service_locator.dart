@@ -1,9 +1,9 @@
 import 'package:get_it/get_it.dart';
-import 'package:stockgram/util/localstorage.dart';
+import 'package:stockgram/util/local_storage_service.dart';
 
 final serviceLocator = GetIt.instance;
 
 void initServiceLocator() {
-  serviceLocator.registerSingleton<DatabaseHelper>(DatabaseHelper());
-  serviceLocator.registerSingleton<BotDatabaseHelper>(BotDatabaseHelper());
+  serviceLocator.registerSingleton<TradeOrderDB>(TradeOrderDB());
+  serviceLocator.registerSingleton<BotOrderDB>(BotOrderDB());
 }

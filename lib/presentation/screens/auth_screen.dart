@@ -128,6 +128,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             decimal: true,
                             signed: false,
                           ),
+                          obscureText: true,
                           decoration: InputDecoration(
                             hintText: 'Password',
                             border: OutlineInputBorder(

@@ -1,6 +1,6 @@
 import 'dart:isolate';
 import 'package:stockgram/data/repositary/stock_data.dart';
-import 'package:stockgram/util/localstorage.dart';
+import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 class BotTrading {
@@ -39,7 +39,7 @@ class BotTrading {
       final sellSignal = message["sell"]["value"] as bool;
 
       if (buySignal) {
-        serviceLocator<BotDatabaseHelper>().insert({
+        serviceLocator<BotOrderDB>().insert({
           "code": "AAPL",
           "ordertype": "Buy",
           "qty": message["buy"]["data"]['qty'],
@@ -51,7 +51,7 @@ class BotTrading {
       }
 
       if (sellSignal) {
-        serviceLocator<BotDatabaseHelper>().insert({
+        serviceLocator<BotOrderDB>().insert({
           "code": "AAPL",
           "ordertype": "Sell",
           "qty": message["buy"]["data"]['qty'],

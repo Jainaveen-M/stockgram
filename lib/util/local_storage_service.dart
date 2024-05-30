@@ -1,13 +1,23 @@
-import 'package:sqflite/sqflite.dart';
+import 'dart:developer';
+
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
-  // Singleton instance
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
+abstract class DbHelper {
+  DbHelper._internal();
+  Future<void> onCreate(Database db, int version);
+  Future<int> insert(Map<String, dynamic> row);
+  Future<List<Map<String, dynamic>>> queryAllRows();
+  Future<Map<String, dynamic>?> queryRow(int id);
+  Future<int> update(Map<String, dynamic> row);
+  Future<int> delete(int id);
+}
 
-  factory DatabaseHelper() => _instance;
+class TradeOrderDB extends DbHelper {
+  TradeOrderDB._internal() : super._internal();
+  static final TradeOrderDB _instance = TradeOrderDB._internal();
 
-  DatabaseHelper._internal();
+  factory TradeOrderDB() => _instance;
 
   static Database? _database;
 
@@ -26,8 +36,6 @@ class DatabaseHelper {
   static const String stockPrice = 'price';
   static const String stockTotal = 'total';
   static const String orderType = 'orderType';
-
-  // SQL to create the table
   static const String _createTableSQL = '''
     CREATE TABLE $table (
       $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,21 +66,30 @@ class DatabaseHelper {
     await db.execute(_createTableSQL);
   }
 
-  // CRUD operations
+  @override
+  Future<void> onCreate(Database db, int version) async {
+    await db.execute(_createTableSQL);
+  }
 
-  // Insert
+  @override
+  Future<int> delete(int id) async {
+    Database db = await database;
+    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  @override
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await database;
     return await db.insert(table, row);
   }
 
-  // Query all rows
+  @override
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await database;
     return await db.query(table);
   }
 
-  // Query specific row
+  @override
   Future<Map<String, dynamic>?> queryRow(int id) async {
     Database db = await database;
     List<Map<String, dynamic>> results =
@@ -80,30 +97,21 @@ class DatabaseHelper {
     return results.isNotEmpty ? results.first : null;
   }
 
-  // Update
+  @override
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await database;
     int id = row[columnId];
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
   }
-
-  // Delete
-  Future<int> delete(int id) async {
-    Database db = await database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
-  }
 }
 
-class BotDatabaseHelper {
-  // Singleton instance
-  static final BotDatabaseHelper _instance = BotDatabaseHelper._internal();
+class BotOrderDB extends DbHelper {
+  BotOrderDB._internal() : super._internal();
+  static final BotOrderDB _instance = BotOrderDB._internal();
 
-  factory BotDatabaseHelper() => _instance;
-
-  BotDatabaseHelper._internal();
+  factory BotOrderDB() => _instance;
 
   static Database? _database;
-
   // Database name
   static const String _databaseName = "botorders.db";
   // Database version
@@ -151,21 +159,30 @@ class BotDatabaseHelper {
     await db.execute(_createTableSQL);
   }
 
-  // CRUD operations
+  @override
+  Future<void> onCreate(Database db, int version) async {
+    await db.execute(_createTableSQL);
+  }
 
-  // Insert
+  @override
+  Future<int> delete(int id) async {
+    Database db = await database;
+    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+  }
+
+  @override
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await database;
     return await db.insert(table, row);
   }
 
-  // Query all rows
+  @override
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await database;
     return await db.query(table);
   }
 
-  // Query specific row
+  @override
   Future<Map<String, dynamic>?> queryRow(int id) async {
     Database db = await database;
     List<Map<String, dynamic>> results =
@@ -173,16 +190,10 @@ class BotDatabaseHelper {
     return results.isNotEmpty ? results.first : null;
   }
 
-  // Update
+  @override
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await database;
     int id = row[columnId];
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
-  }
-
-  // Delete
-  Future<int> delete(int id) async {
-    Database db = await database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 }

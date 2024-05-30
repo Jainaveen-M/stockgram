@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stockgram/firebase_options.dart';
 import 'package:stockgram/presentation/screens/auth_screen.dart';
 import 'package:stockgram/util/bot_trading.dart';
+import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 void main() async {
@@ -15,7 +16,14 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

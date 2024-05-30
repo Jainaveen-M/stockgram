@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:stockgram/util/localstorage.dart';
+import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 part 'buy_sell_event.dart';
 part 'buy_sell_state.dart';
@@ -18,7 +18,7 @@ class BuySellBloc extends Bloc<BuySellEvent, BuySellState> {
     } else if (event.price.isEmpty) {
       emit(ErrorValidatingInput(message: "Please enter a valid price"));
     } else {
-      serviceLocator<DatabaseHelper>().insert({
+      serviceLocator<TradeOrderDB>().insert({
         "code": event.code,
         "ordertype": event.orderType,
         "qty": event.qty,
