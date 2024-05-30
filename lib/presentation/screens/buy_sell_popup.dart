@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stockgram/bloc/buy_sell/buy_sell_bloc.dart';
@@ -236,11 +235,17 @@ class _BuySellWidgetState extends State<BuySellWidget> {
               },
             ),
           ),
-          Center(
-            child: Text("Total Amount : $total"),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+            child: Center(
+              child: Text(
+                "Total Amount : \$$total",
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               widget.bloc.add(
                 CreateOrder(
                   code: widget.code,
@@ -251,13 +256,23 @@ class _BuySellWidgetState extends State<BuySellWidget> {
                 ),
               );
             },
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(MediaQuery.of(context).size.width * 0.3, 40),
-              backgroundColor:
-                  widget.orderType == "Buy" ? Colors.green : Colors.red,
+            child: Container(
+              width: 120,
+              height: 40,
+              decoration: BoxDecoration(
+                  color: widget.orderType == "Buy" ? Colors.green : Colors.red,
+                  borderRadius: BorderRadius.circular(30)),
+              child: Center(
+                child: Text(
+                  widget.orderType,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
-            child: Text(widget.orderType),
-          )
+          ),
         ],
       ),
     );
