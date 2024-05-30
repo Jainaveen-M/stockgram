@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:stockgram/util/local_storage_service.dart';
+import 'package:stockgram/core/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 part 'buy_sell_event.dart';
 part 'buy_sell_state.dart';

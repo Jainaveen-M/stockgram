@@ -17,7 +17,7 @@ class _AuthScreenState extends State<AuthScreen> {
   AuthBloc authBloc = AuthBloc();
   @override
   void initState() {
-    authBloc.add(ShowLoginWidgetEvent());
+    authBloc.add(CheckSession());
     super.initState();
   }
 
@@ -43,7 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
               bloc: authBloc,
               buildWhen: (previous, current) => current is! AuthLoginFailed,
               listenWhen: (previous, current) =>
-                  current is AuthLoginFailed || current is AuthLoginFailed,
+                  current is AuthLoginFailed || current is AuthLoginSuccess,
               listener: (context, state) {
                 if (state is AuthLoginSuccess) {
                   Navigator.pushReplacement(
@@ -63,8 +63,13 @@ class _AuthScreenState extends State<AuthScreen> {
                     authBloc: authBloc,
                   );
                 }
-                return LoginWidget(
-                  authBloc: authBloc,
+                if (state is ShowLoginScreen) {
+                  return LoginWidget(
+                    authBloc: authBloc,
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
               },
             ),

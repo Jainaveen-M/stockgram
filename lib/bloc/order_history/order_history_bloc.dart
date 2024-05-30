@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stockgram/core/local_storage_service.dart';
 import 'package:stockgram/data/models/order.dart';
-import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 part 'order_history_event.dart';
 part 'order_history_state.dart';

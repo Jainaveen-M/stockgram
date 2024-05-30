@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:isolate';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stockgram/core/local_storage_service.dart';
 import 'package:stockgram/data/models/order.dart';
 import 'package:stockgram/data/repositary/stock_data.dart';
 import 'package:stockgram/util/socket.dart';
 import 'package:stockgram/core/bot_trading.dart';
-import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 part 'alogtrading_event.dart';

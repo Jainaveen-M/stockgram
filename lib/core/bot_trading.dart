@@ -1,6 +1,6 @@
 import 'dart:isolate';
+import 'package:stockgram/core/local_storage_service.dart';
 import 'package:stockgram/data/repositary/stock_data.dart';
-import 'package:stockgram/util/local_storage_service.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 class BotTrading {

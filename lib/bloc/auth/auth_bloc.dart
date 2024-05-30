@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stockgram/core/session_storage_service.dart';
+import 'package:stockgram/util/service_locator.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -10,6 +13,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignupEvent>(_firebaseSignup);
     on<ShowLoginWidgetEvent>(_showLoginWidget);
     on<ShowSignupWidgetEvent>(_showSignupWidget);
+    on<CheckSession>(_checkSession);
   }
 
   FutureOr<void> _firebaseLogin(
@@ -28,6 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         String? email = result.user!.email;
         if (email != null) {
+          serviceLocator<SessionStorage>().writeString("session", email);
           emit(
             AuthLoginSuccess(email: email),
           );
@@ -60,6 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
         String? email = result.user!.email;
         if (email != null) {
+          serviceLocator<SessionStorage>().writeString("session", email);
           emit(
             AuthLoginSuccess(email: email),
           );
@@ -95,5 +101,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _showLoginWidget(
       ShowLoginWidgetEvent event, Emitter<AuthState> emit) {
     emit(ShowLoginScreen());
+  }
+
+  FutureOr<void> _checkSession(
+      CheckSession event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    String? t = await serviceLocator<SessionStorage>().readString("session");
+    log("Email in session : ${t}");
+    if (t != null && t.isNotEmpty) {
+      emit(AuthLoginSuccess(email: t));
+    } else {
+      emit(ShowLoginScreen());
+    }
   }
 }

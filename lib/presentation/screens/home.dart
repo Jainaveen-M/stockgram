@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/market/market_bloc.dart';
 import 'package:stockgram/bloc/order_history/order_history_bloc.dart';
+import 'package:stockgram/core/session_storage_service.dart';
 import 'package:stockgram/presentation/screens/auth_screen.dart';
 import 'package:stockgram/presentation/screens/market.dart';
 import 'package:stockgram/presentation/screens/order_history.dart';
 import 'package:stockgram/presentation/screens/portfolio.dart';
+import 'package:stockgram/util/service_locator.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -47,6 +49,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                       TextButton(
                         onPressed: () {
+                          serviceLocator<SessionStorage>().delete("session");
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
