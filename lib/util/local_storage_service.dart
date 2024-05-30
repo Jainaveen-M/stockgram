@@ -11,6 +11,7 @@ abstract class DbHelper {
   Future<Map<String, dynamic>?> queryRow(int id);
   Future<int> update(Map<String, dynamic> row);
   Future<int> delete(int id);
+  Future<List<Map<String, dynamic>>> queryLatestRecord();
 }
 
 class TradeOrderDB extends DbHelper {
@@ -87,6 +88,12 @@ class TradeOrderDB extends DbHelper {
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await database;
     return await db.query(table);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> queryLatestRecord() async {
+    Database db = await database;
+    return await db.query(table, orderBy: 'id DESC');
   }
 
   @override
@@ -180,6 +187,12 @@ class BotOrderDB extends DbHelper {
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await database;
     return await db.query(table);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> queryLatestRecord() async {
+    Database db = await database;
+    return await db.query(table, orderBy: 'id DESC');
   }
 
   @override

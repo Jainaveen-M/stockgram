@@ -21,7 +21,7 @@ class AlogtradingBloc extends Bloc<AlogtradingEvent, AlogtradingState> {
   FutureOr<void> getBotTrades(
       FetchBotTrades event, Emitter<AlogtradingState> emit) async {
     emit(AlogtradingLoading());
-    var t = await serviceLocator<BotOrderDB>().queryAllRows();
+    var t = await serviceLocator<BotOrderDB>().queryLatestRecord();
     List<Order> order = [];
     for (var i in t) {
       order.add(Order.fromMap(i));

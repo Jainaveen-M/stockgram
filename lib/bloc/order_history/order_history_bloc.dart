@@ -13,7 +13,7 @@ class OrderHistoryBloc extends Bloc<OrderHistoryEvent, OrderHistoryState> {
 
   FutureOr<void> _fetchOrderHisotry(
       FetchOrderHistory event, Emitter<OrderHistoryState> emit) async {
-    var t = await serviceLocator<TradeOrderDB>().queryAllRows();
+    var t = await serviceLocator<TradeOrderDB>().queryLatestRecord();
     List<Order> order = [];
     for (var i in t) {
       order.add(Order.fromMap(i));
