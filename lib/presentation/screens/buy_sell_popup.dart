@@ -50,67 +50,87 @@ class _BuySellPopupState extends State<BuySellPopup>
         builder: (context, state) {
           return DefaultTabController(
             length: 3,
-            child: Column(
-              children: [
-                const Text("Orderbook"),
-                const OrderBook(),
-                SizedBox(
-                  height: 40,
-                  child: TabBar(
-                    controller: tabController,
-                    indicator: const UnderlineTabIndicator(
-                        borderSide: BorderSide(
-                      color: Colors.orange,
-                      width: 3,
-                    )),
-                    indicatorPadding:
-                        const EdgeInsets.fromLTRB(6.0, 0.0, 6.0, 0.0),
-                    tabs: [
-                      Text(
-                        'Buy',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: currentTab == 0
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          fontSize: 16.0,
-                          color:
-                              currentTab == 0 ? Colors.black : unselectedColor,
-                        ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.code,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        'Sell',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: currentTab == 1
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          fontSize: 16.0,
-                          color:
-                              currentTab == 1 ? Colors.black : unselectedColor,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    controller: tabController,
-                    children: [
-                      BuySellWidget(
-                        orderType: "Buy",
-                        bloc: buySellBloc,
-                        code: widget.code,
-                      ),
-                      BuySellWidget(
-                        orderType: "Sell",
-                        bloc: buySellBloc,
-                        code: widget.code,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: OrderBook(
+                      code: widget.code,
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 40,
+                    child: TabBar(
+                      controller: tabController,
+                      indicator: const UnderlineTabIndicator(
+                          borderSide: BorderSide(
+                        color: Colors.orange,
+                        width: 3,
+                      )),
+                      indicatorPadding:
+                          const EdgeInsets.fromLTRB(6.0, 0.0, 6.0, 0.0),
+                      tabs: [
+                        Text(
+                          'Buy',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: currentTab == 0
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            fontSize: 16.0,
+                            color: currentTab == 0
+                                ? Colors.black
+                                : unselectedColor,
+                          ),
+                        ),
+                        Text(
+                          'Sell',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: currentTab == 1
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            fontSize: 16.0,
+                            color: currentTab == 1
+                                ? Colors.black
+                                : unselectedColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: tabController,
+                      children: [
+                        BuySellWidget(
+                          orderType: "Buy",
+                          bloc: buySellBloc,
+                          code: widget.code,
+                        ),
+                        BuySellWidget(
+                          orderType: "Sell",
+                          bloc: buySellBloc,
+                          code: widget.code,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -233,8 +253,11 @@ class _BuySellWidgetState extends State<BuySellWidget> {
               );
             },
             style: ElevatedButton.styleFrom(
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.3, 40)),
-            child: const Text("Buy"),
+              fixedSize: Size(MediaQuery.of(context).size.width * 0.3, 40),
+              backgroundColor:
+                  widget.orderType == "Buy" ? Colors.green : Colors.red,
+            ),
+            child: Text(widget.orderType),
           )
         ],
       ),

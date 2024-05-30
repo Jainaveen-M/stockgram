@@ -6,7 +6,11 @@ import 'package:stockgram/bloc/orderbook/orderbook_bloc.dart';
 import 'package:stockgram/socket/socket.dart';
 
 class OrderBook extends StatefulWidget {
-  const OrderBook({super.key});
+  final String code;
+  const OrderBook({
+    super.key,
+    required this.code,
+  });
 
   @override
   State<OrderBook> createState() => _OrderBookState();
@@ -39,64 +43,147 @@ class _OrderBookState extends State<OrderBook> {
           return Row(
             children: [
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 200,
-                  color: Colors.green.shade100,
-                  child: ListView.builder(
-                    itemCount: state.buyOrderBookData.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(1.0),
-                        child: Container(
-                          color: Colors.green.shade200,
-                          child: Padding(
-                            padding: const EdgeInsets.all(11.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(state.buyOrderBookData[index].qty),
-                                Text(state.buyOrderBookData[index].price),
-                              ],
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 11.0, right: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Qty (${widget.code})",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
+                            const Text(
+                              "Bid (\$)",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.buyOrderBookData.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10.0,
+                                right: 10,
+                                top: 15,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    state.buyOrderBookData[index].qty,
+                                    style: const TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    state.buyOrderBookData[index].price,
+                                    style: const TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 200,
-                  color: Colors.red.shade100,
-                  child: ListView.builder(
-                    itemCount: state.sellOrderBookData.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(1.0),
-                        child: Container(
-                          color: Colors.red.shade200,
-                          child: Padding(
-                            padding: const EdgeInsets.all(11.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(state.sellOrderBookData[index].qty),
-                                Text(state.sellOrderBookData[index].price),
-                              ],
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 11.0, right: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Aks (\$)",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
+                            Text(
+                              "Qty (${widget.code})",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.sellOrderBookData.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10.0,
+                                right: 10,
+                                top: 15,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    state.sellOrderBookData[index].price,
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    state.sellOrderBookData[index].qty,
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ],
           );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
+        return const SizedBox(
+          height: 200,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       },
     );

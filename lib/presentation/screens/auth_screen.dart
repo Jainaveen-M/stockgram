@@ -32,18 +32,9 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
-  void _signInWithEmailAndPassword() async {}
-
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordCotroller = TextEditingController();
   AuthBloc authBloc = AuthBloc();
-  @override
-  void initState() {
-    // Navigator.pushReplacement(
-    //     context, MaterialPageRoute(builder: (context) => const Home()));
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

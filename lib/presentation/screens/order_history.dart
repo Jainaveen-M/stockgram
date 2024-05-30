@@ -28,7 +28,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                 itemCount: state.orderHistory.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    elevation: 2.0,
+                    elevation: 1.0,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(

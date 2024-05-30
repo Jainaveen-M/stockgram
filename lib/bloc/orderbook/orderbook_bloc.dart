@@ -8,14 +8,13 @@ part 'orderbook_state.dart';
 class OrderbookBloc extends Bloc<OrderbookEvent, OrderbookState> {
   OrderbookBloc() : super(OrderbookInitial()) {
     on<RedfreshOrderBookData>(_refereshOrderBookData);
-  }
+  } 
 
   FutureOr<void> _refereshOrderBookData(
       RedfreshOrderBookData event, Emitter<OrderbookState> emit) {
     List<OrderBookRecord> buy = [];
     List<OrderBookRecord> sell = [];
     var data = jsonDecode(event.data);
-    // log("buy order " + jsonDecode(event.data['buy']));
     for (var i in data['buy']) {
       buy.add(OrderBookRecord.fromMap(i));
     }

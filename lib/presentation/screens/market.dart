@@ -49,9 +49,21 @@ class _MarketState extends State<Market> {
                       onTap: () {
                         showModalBottomSheet(
                           context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
                           builder: (context) {
-                            return BuySellPopup(
-                              code: state.markets[index].code,
+                            return Container(
+                              height: MediaQuery.of(context).size.height * 0.7,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25.0),
+                                  topRight: Radius.circular(25.0),
+                                ),
+                              ),
+                              child: BuySellPopup(
+                                code: state.markets[index].code,
+                              ),
                             );
                           },
                         );

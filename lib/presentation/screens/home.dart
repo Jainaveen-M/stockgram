@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/market/market_bloc.dart';
 import 'package:stockgram/bloc/order_history/order_history_bloc.dart';
+import 'package:stockgram/presentation/screens/auth_screen.dart';
 import 'package:stockgram/presentation/screens/market.dart';
 import 'package:stockgram/presentation/screens/order_history.dart';
+import 'package:stockgram/presentation/screens/portfolio.dart';
+import 'package:stockgram/util/localstorage.dart';
+import 'package:stockgram/util/service_locator.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -28,6 +34,41 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Stockgram"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text("Logout"),
+                    content: const Text("Are you sure you want to logout?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text("No"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AuthScreen()));
+                        },
+                        child: const Text("Yes"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.logout,
+            ),
+          )
+        ],
       ),
       body: DefaultTabController(
         length: 3,
@@ -89,11 +130,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     create: (context) => OrderHistoryBloc(),
                     child: const OrderHistory(),
                   ),
-                  ListView.builder(
-                      itemCount: 100,
-                      itemBuilder: (_, int index) {
-                        return Text('Index $index');
-                      }),
+                  PortFolio()
                 ],
               ),
             ),
