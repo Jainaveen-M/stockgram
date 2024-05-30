@@ -22,7 +22,7 @@ Requirements Archived:-
 7. Used Singleton wherever need.
 8. Used Firebase for user authentication.
 9. OOP Principles
-10. Feature available
+10. Features available
     - orderbook
     - buysell form
     - market data
