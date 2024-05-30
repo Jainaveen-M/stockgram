@@ -24,7 +24,7 @@ class _PortFolioState extends State<PortFolio> {
   }
 
   final List<Holdings> overallPortFolio = [];
-
+  double totalInvested = 0;
   List<Holdings> aggregateOrders(List<Order> orders) {
     final Map<String, Map<String, dynamic>> portfolio = {};
 
@@ -61,7 +61,9 @@ class _PortFolioState extends State<PortFolio> {
     for (String i in portfolio.keys) {
       log(i);
       setState(() {
-        overallPortFolio.add(Holdings.fromMap(portfolio[i]!));
+        Holdings h = Holdings.fromMap(portfolio[i]!);
+        totalInvested += double.parse(h.total);
+        overallPortFolio.add(h);
       });
     }
 
@@ -78,6 +80,27 @@ class _PortFolioState extends State<PortFolio> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              const Text(
+                "Total Invested",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              Text(
+                "\$${totalInvested.toStringAsFixed(2)}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              )
+            ],
+          ),
+        ),
         Expanded(
           child: ListView.builder(
             itemCount: overallPortFolio.length,

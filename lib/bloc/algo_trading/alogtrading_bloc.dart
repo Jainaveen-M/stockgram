@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:isolate';
-
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/data/models/order.dart';
 import 'package:stockgram/data/repositary/stock_data.dart';
 import 'package:stockgram/socket/socket.dart';
@@ -39,7 +36,6 @@ class AlogtradingBloc extends Bloc<AlogtradingEvent, AlogtradingState> {
       orderbookClient.stream,
       onData: (message) {
         var marketData = jsonDecode(message);
-        log("Message $message");
         final currentBestBuyPrice =
             double.parse(marketData["buy"]![0]["price"]!);
         final currentBestSellPrice =
@@ -59,9 +55,13 @@ class AlogtradingBloc extends Bloc<AlogtradingEvent, AlogtradingState> {
         SendPort sendPort = BotTrading().receivePort.sendPort;
         sendPort.send(sendData);
         if (buySignal) {
-          return BotOrderCreate(message: marketData["buy"]![0].toString());
+          return BotOrderCreate(
+              message:
+                  "Bot Order buy created ${marketData['buy']![0].toString()}");
         } else if (sellSignal) {
-          return BotOrderCreate(message: marketData["buy"]![0].toString());
+          return BotOrderCreate(
+              message:
+                  "Bot Order sell created ${marketData['sell']![0].toString()}");
         }
         return AlogtradingFailed();
       },

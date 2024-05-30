@@ -77,12 +77,10 @@ class BotTrading {
       receivePort.sendPort,
     ); // Initial price
     receivePort.listen((message) {
-      log("single " + message.toString());
       final buySignal = message["buy"]["value"] as bool;
       final sellSignal = message["sell"]["value"] as bool;
 
       if (buySignal) {
-        log("Buy signal generated! (Price decreased by 5%)");
         serviceLocator<BotDatabaseHelper>().insert({
           "code": "AAPL",
           "ordertype": "Buy",
@@ -95,7 +93,6 @@ class BotTrading {
       }
 
       if (sellSignal) {
-        log("Sell signal generated! (Price increased by 5%)");
         serviceLocator<BotDatabaseHelper>().insert({
           "code": "AAPL",
           "ordertype": "Sell",

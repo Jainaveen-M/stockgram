@@ -1,6 +1,5 @@
 part of 'market_bloc.dart';
 
-@immutable
 class MarketState {}
 
 class MarketInitial extends MarketState {}

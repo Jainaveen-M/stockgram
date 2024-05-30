@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/data/models/stock.dart';
 import 'package:stockgram/data/repositary/stock_data.dart';
-
 part 'market_event.dart';
 part 'market_state.dart';
 

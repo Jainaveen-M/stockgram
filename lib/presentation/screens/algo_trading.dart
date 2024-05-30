@@ -50,7 +50,7 @@ class _AlgoTradingState extends State<AlgoTrading> {
           if (state is BotOrderCreate) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text("Bot Order created ${state.message}"),
+                content: Text("${state.message}"),
               ),
             );
           }
@@ -98,7 +98,7 @@ class _AlgoTradingState extends State<AlgoTrading> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Total : \$${order.total}",
+                                "Total : \$${double.parse(order.total).toStringAsFixed(2)}",
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 14),
                               ),

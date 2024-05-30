@@ -4,14 +4,14 @@ List<dynamic> stockList = [
     "code": "AAPL",
     "price": "142",
     "img":
-        "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/544/Google__G__Logo-1024.png"
+        "https://static.vecteezy.com/system/resources/previews/019/766/198/large_2x/apple-logo-apple-icon-transparent-free-png.png"
   },
   {
     "name": "Google",
     "code": "GOOGL",
     "price": "142",
     "img":
-        "https://w7.pngwing.com/pngs/654/859/png-transparent-apple-logo-cupertino-cartoon-crowd-company-computer-logo.png"
+        "https://banner2.cleanpng.com/20180521/ers/kisspng-google-logo-5b02bbe1d5c6e0.2384399715269058258756.jpg"
   },
   {
     "name": "Amazon",

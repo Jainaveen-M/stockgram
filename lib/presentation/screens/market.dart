@@ -90,7 +90,11 @@ class _MarketState extends State<Market> {
                             ],
                           ),
                           trailing: Text(
-                            state.markets[index].price,
+                            "\$${state.markets[index].price}",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
