@@ -57,11 +57,11 @@ class AlogtradingBloc extends Bloc<AlogtradingEvent, AlogtradingState> {
         if (buySignal) {
           return BotOrderCreate(
               message:
-                  "Bot Order buy created ${marketData['buy']![0].toString()}");
+                  "Bot buy order created ${marketData['buy']![0].toString()}");
         } else if (sellSignal) {
           return BotOrderCreate(
               message:
-                  "Bot Order sell created ${marketData['sell']![0].toString()}");
+                  "Bot sell order created ${marketData['sell']![0].toString()}");
         }
         return AlogtradingFailed();
       },

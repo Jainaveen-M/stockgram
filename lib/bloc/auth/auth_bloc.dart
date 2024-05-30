@@ -16,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (event.password.isEmpty) {
       emit(AuthLoginFailed(message: "Please enter you password"));
     } else {
+      emit(AuthLoading());
       final UserCredential result =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: event.email,

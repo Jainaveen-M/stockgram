@@ -52,7 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
             ),
-            BlocListener<AuthBloc, AuthState>(
+            BlocConsumer<AuthBloc, AuthState>(
               bloc: authBloc,
               listener: (context, state) {
                 if (state is AuthLoginSuccess) {
@@ -73,117 +73,125 @@ class _AuthScreenState extends State<AuthScreen> {
                   );
                 }
               },
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 10.0),
-                      child: Text(
-                        "Login",
+              builder: (context, state) {
+                if (state is AuthLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 32,
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        "Please signin to continue",
                         style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 32,
+                          fontSize: 16,
                         ),
                       ),
-                    ),
-                    const Text(
-                      "Please signin to continue",
-                      style: TextStyle(
-                        fontSize: 16,
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: TextField(
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                          signed: false,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 4),
-                            borderRadius: BorderRadius.circular(12),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: TextField(
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
+                            signed: false,
                           ),
-                          prefixIcon: const Icon(Icons.email, size: 24),
-                        ),
-                        controller: userNameController,
-                        onChanged: (value) {},
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: TextField(
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                          signed: false,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(width: 4),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          prefixIcon: const Icon(Icons.lock_rounded, size: 24),
-                        ),
-                        controller: passwordCotroller,
-                        onChanged: (value) {},
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            // _signInWithEmailAndPassword();
-                            authBloc.add(
-                              AuthLoginEvent(
-                                email: userNameController.text,
-                                password: passwordCotroller.text,
-                              ),
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(30),
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(width: 4),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            height: 40,
-                            width: 140,
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                            prefixIcon: const Icon(Icons.email, size: 24),
+                          ),
+                          controller: userNameController,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: TextField(
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
+                            signed: false,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(width: 4),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            prefixIcon:
+                                const Icon(Icons.lock_rounded, size: 24),
+                          ),
+                          controller: passwordCotroller,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: () {
+                              // _signInWithEmailAndPassword();
+                              authBloc.add(
+                                AuthLoginEvent(
+                                  email: userNameController.text,
+                                  password: passwordCotroller.text,
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              height: 40,
+                              width: 140,
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_right_alt_rounded,
-                                    color: Colors.white,
-                                  )
-                                ],
+                                    Icon(
+                                      Icons.arrow_right_alt_rounded,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    ],
+                  ),
+                );
+              },
             ),
             const Center(
               child: Padding(

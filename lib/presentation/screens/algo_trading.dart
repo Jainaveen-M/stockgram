@@ -1,15 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/algo_trading/alogtrading_bloc.dart';
 import 'package:stockgram/data/models/order.dart';
-import 'package:stockgram/socket/socket.dart';
-import 'package:stockgram/util/bot_trading.dart';
-import 'package:stockgram/util/localstorage.dart';
-import 'package:stockgram/util/service_locator.dart';
 
 class AlgoTrading extends StatefulWidget {
   const AlgoTrading({super.key});

@@ -4,6 +4,8 @@ class AuthState {}
 
 class AuthInitial extends AuthState {}
 
+class AuthLoading extends AuthState {}
+
 class AuthLoginSuccess extends AuthState {
   final String email;
   AuthLoginSuccess({

@@ -19,7 +19,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late int currentTab;
   late TabController tabController;
-  Color unselectedColor = Colors.grey;
   @override
   void initState() {
     currentTab = 0;
@@ -82,35 +81,32 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   width: 3,
                 )),
                 indicatorPadding: const EdgeInsets.fromLTRB(6.0, 0.0, 6.0, 0.0),
-                tabs: [
+                tabs: const [
                   Text(
                     'Market',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontWeight:
-                          currentTab == 0 ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       fontSize: 16.0,
-                      color: currentTab == 0 ? Colors.black : unselectedColor,
+                      color: Colors.black,
                     ),
                   ),
                   Text(
                     'History',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontWeight:
-                          currentTab == 1 ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       fontSize: 16.0,
-                      color: currentTab == 1 ? Colors.black : unselectedColor,
+                      color: Colors.black,
                     ),
                   ),
                   Text(
                     'Portfolio',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontWeight:
-                          currentTab == 2 ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       fontSize: 16.0,
-                      color: currentTab == 2 ? Colors.black : unselectedColor,
+                      color: Colors.black,
                     ),
                   ),
                 ],

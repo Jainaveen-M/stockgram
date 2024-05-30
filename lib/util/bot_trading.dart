@@ -1,9 +1,4 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:ffi';
 import 'dart:isolate';
-
-import 'package:stockgram/socket/socket.dart';
 import 'package:stockgram/util/localstorage.dart';
 import 'package:stockgram/util/service_locator.dart';
 
