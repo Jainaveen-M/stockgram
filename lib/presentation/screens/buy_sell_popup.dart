@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/orderbook/orderbook_bloc.dart';
 import 'package:stockgram/presentation/widgets/orderbook.dart';
 import 'package:stockgram/socket/socket.dart';
+import 'package:stockgram/util/toast.dart';
 
 class BuySellPopup extends StatefulWidget {
   final String code;
@@ -42,9 +43,8 @@ class _BuySellPopupState extends State<BuySellPopup>
         listener: (context, state) {
           if (state is OrderPlacedSuccessfully) {
             Navigator.pop(context);
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(
-                    "${state.orderType} of ${state.qty} has been placed successfully.")));
+            CustomToast.showErroMessage(
+                "${state.orderType} of ${state.qty} has been placed successfully.");
           }
           if (state is ErrorValidatingInput) {}
         },

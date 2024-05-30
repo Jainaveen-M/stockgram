@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/algo_trading/alogtrading_bloc.dart';
 import 'package:stockgram/data/models/order.dart';
+import 'package:stockgram/util/toast.dart';
 
 class AlgoTrading extends StatefulWidget {
   const AlgoTrading({super.key});
@@ -31,20 +32,10 @@ class _AlgoTradingState extends State<AlgoTrading> {
         buildWhen: (previous, current) => current is! BotOrderCreate,
         listener: (context, state) {
           if (state is AlogtradingFailed) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text(
-                  "Unable to fetch bot orders",
-                ),
-              ),
-            );
+            CustomToast.showErroMessage("Unable to fetch bot orders");
           }
           if (state is BotOrderCreate) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("${state.message}"),
-              ),
-            );
+            CustomToast.showErroMessage(state.message);
           }
         },
         builder: (context, state) {

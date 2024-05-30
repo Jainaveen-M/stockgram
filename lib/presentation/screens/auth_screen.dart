@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stockgram/bloc/auth/auth_bloc.dart';
 import 'package:stockgram/presentation/widgets/bottombar.dart';
+import 'package:stockgram/util/toast.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -64,13 +66,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   );
                 }
                 if (state is AuthLoginFailed) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        state.message,
-                      ),
-                    ),
-                  );
+                  CustomToast.showErroMessage(state.message);
                 }
               },
               builder: (context, state) {
