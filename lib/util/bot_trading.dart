@@ -1,10 +1,9 @@
 import 'dart:isolate';
+import 'package:stockgram/data/repositary/stock_data.dart';
 import 'package:stockgram/util/localstorage.dart';
 import 'package:stockgram/util/service_locator.dart';
 
 class BotTrading {
-  // Function to simulate market data updates (replace with actual data source)
-
   static ReceivePort? _receivePort;
   ReceivePort get receivePort {
     if (_receivePort != null) return _receivePort!;
@@ -12,44 +11,8 @@ class BotTrading {
     return _receivePort!;
   }
 
-  static Map<String, dynamic> previousData = {
-    "buy": [
-      {"price": "43.48", "qty": "94"},
-      {"price": "69.83", "qty": "13"},
-      {"price": "70.41", "qty": "60"},
-      {"price": "48.74", "qty": "26"},
-      {"price": "2.12", "qty": "7"}
-    ],
-    "sell": [
-      {"price": "92.91", "qty": "48"},
-      {"price": "94.66", "qty": "20"},
-      {"price": "26.49", "qty": "49"},
-      {"price": "22.75", "qty": "83"},
-      {"price": "89.77", "qty": "28"}
-    ]
-  };
-  static Future<Map<String, List<Map<String, String>>>> getMarketData() async {
-    await Future.delayed(const Duration(milliseconds: 500)); // Simulate delay
-    return {
-      "buy": [
-        {"price": "43.48", "qty": "94"},
-        {"price": "69.83", "qty": "13"},
-        {"price": "70.41", "qty": "60"},
-        {"price": "48.74", "qty": "26"},
-        {"price": "2.12", "qty": "7"}
-      ],
-      "sell": [
-        {"price": "92.91", "qty": "48"},
-        {"price": "94.66", "qty": "20"},
-        {"price": "26.49", "qty": "49"},
-        {"price": "22.75", "qty": "83"},
-        {"price": "89.77", "qty": "28"}
-      ]
-    };
-  }
-
   static void processMarketData(SendPort sendPort) async {
-    final marketData = await getMarketData();
+    final marketData = previousData;
     final currentBestBuyPrice = double.parse(marketData["buy"]![0]["price"]!);
     final currentBestSellPrice = double.parse(marketData["sell"]![0]["price"]!);
     final previousBestBuyPrice =
