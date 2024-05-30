@@ -13,4 +13,11 @@ class AlogtradingLoaded extends AlogtradingState {
   });
 }
 
+class BotOrderCreate extends AlogtradingState {
+  final String message;
+  BotOrderCreate({
+    required this.message,
+  });
+}
+
 class AlogtradingFailed extends AlogtradingState {}

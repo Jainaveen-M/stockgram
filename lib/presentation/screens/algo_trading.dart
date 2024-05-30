@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/algo_trading/alogtrading_bloc.dart';
 import 'package:stockgram/data/models/order.dart';
+import 'package:stockgram/socket/socket.dart';
+import 'package:stockgram/util/bot_trading.dart';
 import 'package:stockgram/util/localstorage.dart';
 import 'package:stockgram/util/service_locator.dart';
 
@@ -16,9 +20,11 @@ class AlgoTrading extends StatefulWidget {
 
 class _AlgoTradingState extends State<AlgoTrading> {
   AlogtradingBloc alogtradingBloc = AlogtradingBloc();
+
   @override
   void initState() {
     alogtradingBloc.add(FetchBotTrades());
+    alogtradingBloc.add(ListenSocketEvent());
     super.initState();
   }
 
@@ -30,6 +36,7 @@ class _AlgoTradingState extends State<AlgoTrading> {
       ),
       body: BlocConsumer<AlogtradingBloc, AlogtradingState>(
         bloc: alogtradingBloc,
+        buildWhen: (previous, current) => current is! BotOrderCreate,
         listener: (context, state) {
           if (state is AlogtradingFailed) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -37,6 +44,13 @@ class _AlgoTradingState extends State<AlgoTrading> {
                 content: Text(
                   "Unable to fetch bot orders",
                 ),
+              ),
+            );
+          }
+          if (state is BotOrderCreate) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Bot Order created ${state.message}"),
               ),
             );
           }

@@ -9,6 +9,14 @@ import 'package:stockgram/util/service_locator.dart';
 
 class BotTrading {
   // Function to simulate market data updates (replace with actual data source)
+
+  static ReceivePort? _receivePort;
+  ReceivePort get receivePort {
+    if (_receivePort != null) return _receivePort!;
+    _receivePort = ReceivePort();
+    return _receivePort!;
+  }
+
   static Map<String, dynamic> previousData = {
     "buy": [
       {"price": "43.48", "qty": "94"},
@@ -45,36 +53,6 @@ class BotTrading {
     };
   }
 
-  static listSocket(SendPort sendPort) {
-    WebSocketClient _orderbookClient = WebSocketClient('ws://localhost:8060');
-    _orderbookClient.stream.listen((message) {
-      var marketData = jsonDecode(message);
-
-      final currentBestBuyPrice = double.parse(marketData["buy"]![0]["price"]!);
-      final currentBestSellPrice =
-          double.parse(marketData["sell"]![0]["price"]!);
-      final previousBestBuyPrice =
-          double.parse(previousData["buy"]![0]["price"]!);
-      final previousBestSellPrice =
-          double.parse(previousData["sell"]![0]["price"]!);
-      final buySignal = previousBestBuyPrice * 0.05 > currentBestBuyPrice;
-      final sellSignal = previousBestSellPrice * 0.05 < currentBestSellPrice;
-      // log(previousBestBuyPrice.toString() +
-      //     "    " +
-      //     currentBestBuyPrice.toString());
-      // log(previousBestSellPrice.toString() +
-      //     "    " +
-      //     currentBestSellPrice.toString());
-      previousData = marketData;
-      var sendData = {
-        "buy": {"value": true, "data": marketData["buy"]![0]},
-        "sell": {"value": true, "data": marketData["sell"]![0]}
-      };
-      sendPort.send(sendData);
-    });
-  }
-
-// Isolate function to process market data and generate trading signals
   static void processMarketData(SendPort sendPort) async {
     final marketData = await getMarketData();
     final currentBestBuyPrice = double.parse(marketData["buy"]![0]["price"]!);
@@ -83,25 +61,23 @@ class BotTrading {
         double.parse(previousData["buy"]![0]["price"]!);
     final previousBestSellPrice =
         double.parse(previousData["sell"]![0]["price"]!);
-    final buySignal = previousBestBuyPrice > currentBestBuyPrice;
-    final sellSignal = previousBestSellPrice < currentBestSellPrice;
+    bool buySignal = previousBestBuyPrice * 0.05 > currentBestBuyPrice;
+    bool sellSignal = previousBestSellPrice * 0.05 < currentBestSellPrice;
     previousData = marketData;
     var sendData = {
-      "buy": {"value": true, "data": marketData["buy"]![0]},
-      "sell": {"value": true, "data": marketData["sell"]![0]}
+      "buy": {"value": buySignal, "data": marketData["buy"]![0]},
+      "sell": {"value": sellSignal, "data": marketData["sell"]![0]}
     };
     sendPort.send(sendData);
   }
 
-  static void initIosalte() async {
-    final receivePort = ReceivePort();
+  void initIsolate() async {
     final isolate = await Isolate.spawn(
       processMarketData,
       receivePort.sendPort,
     ); // Initial price
-    listSocket(receivePort.sendPort);
     receivePort.listen((message) {
-      log(message.toString());
+      log("single " + message.toString());
       final buySignal = message["buy"]["value"] as bool;
       final sellSignal = message["sell"]["value"] as bool;
 

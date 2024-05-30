@@ -34,3 +34,20 @@ List<dynamic> stockList = [
         "https://static-00.iconduck.com/assets.00/microsoft-icon-2048x2048-xtoxrveo.png"
   }
 ];
+
+Map<String, dynamic> previousData = {
+  "buy": [
+    {"price": "43.48", "qty": "94"},
+    {"price": "69.83", "qty": "13"},
+    {"price": "70.41", "qty": "60"},
+    {"price": "48.74", "qty": "26"},
+    {"price": "2.12", "qty": "7"}
+  ],
+  "sell": [
+    {"price": "92.91", "qty": "48"},
+    {"price": "94.66", "qty": "20"},
+    {"price": "26.49", "qty": "49"},
+    {"price": "22.75", "qty": "83"},
+    {"price": "89.77", "qty": "28"}
+  ]
+};
