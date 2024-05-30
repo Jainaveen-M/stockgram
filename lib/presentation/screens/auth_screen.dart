@@ -63,6 +63,15 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   );
                 }
+                if (state is AuthLoginFailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        state.message,
+                      ),
+                    ),
+                  );
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -136,9 +145,12 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: GestureDetector(
                           onTap: () {
                             // _signInWithEmailAndPassword();
-                            authBloc.add(AuthLoginEvent(
+                            authBloc.add(
+                              AuthLoginEvent(
                                 email: userNameController.text,
-                                password: passwordCotroller.text));
+                                password: passwordCotroller.text,
+                              ),
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(

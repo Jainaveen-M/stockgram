@@ -11,14 +11,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _firebaseLogin(
       AuthLoginEvent event, Emitter<AuthState> emit) async {
-    final UserCredential result =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: "jaitest@gmail.com",
-      password: "Jai@1234",
-    );
-    String? email = result.user!.email;
-    if (email != null) {
-      emit(AuthLoginSuccess(email: email));
-    } else {}
+    if (event.email.isEmpty) {
+      emit(AuthLoginFailed(message: "Please enter you email"));
+    } else if (event.password.isEmpty) {
+      emit(AuthLoginFailed(message: "Please enter you password"));
+    } else {
+      final UserCredential result =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: event.email,
+        password: event.password,
+      );
+      String? email = result.user!.email;
+      if (email != null) {
+        emit(
+          AuthLoginSuccess(email: email),
+        );
+      } else {
+        emit(
+          AuthLoginFailed(message: "Something went wrong. Please try again."),
+        );
+      }
+    }
   }
 }
