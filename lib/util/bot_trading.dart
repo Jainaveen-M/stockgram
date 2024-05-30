@@ -30,7 +30,7 @@ class BotTrading {
   }
 
   void initIsolate() async {
-    final isolate = await Isolate.spawn(
+    await Isolate.spawn(
       processMarketData,
       receivePort.sendPort,
     ); // Initial price

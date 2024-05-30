@@ -36,7 +36,6 @@ class _OrderBookState extends State<OrderBook> {
     return BlocConsumer<OrderbookBloc, OrderbookState>(
       bloc: orderbookBloc,
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         if (state is OrderbookLoaded) {

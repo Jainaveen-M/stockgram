@@ -2,8 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/auth/auth_bloc.dart';
-import 'package:stockgram/presentation/widgets/bottombar.dart';
-import 'package:stockgram/util/toast.dart';
+
 
 class SignupWidget extends StatefulWidget {
   final AuthBloc authBloc;

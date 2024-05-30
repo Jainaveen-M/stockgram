@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/market/market_bloc.dart';
@@ -52,7 +50,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AuthScreen()));
+                                  builder: (context) => const AuthScreen()));
                         },
                         child: const Text("Yes"),
                       ),
@@ -124,7 +122,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     create: (context) => OrderHistoryBloc(),
                     child: const OrderHistory(),
                   ),
-                  PortFolio()
+                  const PortFolio()
                 ],
               ),
             ),

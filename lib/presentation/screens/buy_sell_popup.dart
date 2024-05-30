@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +5,6 @@ import 'package:stockgram/bloc/buy_sell/buy_sell_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/orderbook/orderbook_bloc.dart';
 import 'package:stockgram/presentation/widgets/orderbook.dart';
-import 'package:stockgram/socket/socket.dart';
 import 'package:stockgram/util/toast.dart';
 
 class BuySellPopup extends StatefulWidget {

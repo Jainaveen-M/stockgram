@@ -73,11 +73,11 @@ class _OrderHistoryState extends State<OrderHistory> {
                                 children: [
                                   Text(
                                     'Qty: ${state.orderHistory[index].qty}',
-                                    style: TextStyle(fontSize: 14),
+                                    style: const TextStyle(fontSize: 14),
                                   ),
                                   Text(
                                     'Price: \$${state.orderHistory[index].price}',
-                                    style: TextStyle(fontSize: 14),
+                                    style: const TextStyle(fontSize: 14),
                                   ),
                                   Text(
                                     'Total: \$${state.orderHistory[index].total}',

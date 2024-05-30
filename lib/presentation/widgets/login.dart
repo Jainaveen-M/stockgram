@@ -160,7 +160,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         TextSpan(
                           children: [
                             const TextSpan(
-                              text: "Dont\'t have an account?",
+                              text: "Dont't have an account?",
                             ),
                             TextSpan(
                               text: " Signup",
