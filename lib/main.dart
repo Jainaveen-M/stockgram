@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/auth/auth_bloc.dart';
-import 'package:stockgram/core/session_storage_service.dart';
 import 'package:stockgram/firebase_options.dart';
 import 'package:stockgram/presentation/screens/auth_screen.dart';
 import 'package:stockgram/core/bot_trading.dart';
