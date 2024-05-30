@@ -5,4 +5,5 @@ final serviceLocator = GetIt.instance;
 
 void initServiceLocator() {
   serviceLocator.registerSingleton<DatabaseHelper>(DatabaseHelper());
+  serviceLocator.registerSingleton<BotDatabaseHelper>(BotDatabaseHelper());
 }
