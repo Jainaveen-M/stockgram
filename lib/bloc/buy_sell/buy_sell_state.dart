@@ -19,3 +19,10 @@ class OrderPlacedSuccessfully extends BuySellState {
     required this.total,
   });
 }
+
+class ErrorValidatingInput extends BuySellState {
+  final String message;
+  ErrorValidatingInput({
+    required this.message,
+  });
+}

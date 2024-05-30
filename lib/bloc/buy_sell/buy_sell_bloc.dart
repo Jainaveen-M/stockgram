@@ -13,20 +13,26 @@ class BuySellBloc extends Bloc<BuySellEvent, BuySellState> {
 
   FutureOr<void> _createOrder(
       CreateOrder event, Emitter<BuySellState> emit) async {
-    serviceLocator<DatabaseHelper>().insert({
-      "code": event.code,
-      "ordertype": event.orderType,
-      "qty": event.qty,
-      "price": event.price,
-      "total": event.total,
-    });
-    emit(
-      OrderPlacedSuccessfully(
-        orderType: event.orderType,
-        price: event.price,
-        qty: event.qty,
-        total: event.total,
-      ),
-    );
+    if (event.qty.isEmpty) {
+      emit(ErrorValidatingInput(message: "Please enter a valid quantity"));
+    } else if (event.price.isEmpty) {
+      emit(ErrorValidatingInput(message: "Please enter a valid price"));
+    } else {
+      serviceLocator<DatabaseHelper>().insert({
+        "code": event.code,
+        "ordertype": event.orderType,
+        "qty": event.qty,
+        "price": event.price,
+        "total": event.total,
+      });
+      emit(
+        OrderPlacedSuccessfully(
+          orderType: event.orderType,
+          price: event.price,
+          qty: event.qty,
+          total: event.total,
+        ),
+      );
+    }
   }
 }

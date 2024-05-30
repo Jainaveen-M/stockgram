@@ -46,6 +46,7 @@ class _BuySellPopupState extends State<BuySellPopup>
                 content: Text(
                     "${state.orderType} of ${state.qty} has been placed successfully.")));
           }
+          if (state is ErrorValidatingInput) {}
         },
         builder: (context, state) {
           return DefaultTabController(
