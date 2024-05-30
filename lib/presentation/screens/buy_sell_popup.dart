@@ -43,7 +43,7 @@ class _BuySellPopupState extends State<BuySellPopup>
         listener: (context, state) {
           if (state is OrderPlacedSuccessfully) {
             Navigator.pop(context);
-            CustomToast.showErroMessage(
+            CustomToast.showSuccessMessage(
                 "${state.orderType} of ${state.qty} has been placed successfully.");
           }
           if (state is ErrorValidatingInput) {}
