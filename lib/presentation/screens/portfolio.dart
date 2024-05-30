@@ -30,8 +30,25 @@ class _PortFolioState extends State<PortFolio> {
 
     for (var order in orders) {
       if (portfolio.containsKey(order.code)) {
-        portfolio[order.code]!['qty'] += order.qty;
-        portfolio[order.code]!['total'] += order.total;
+        if (order.orderType == "Buy") {
+          portfolio[order.code]!['qty'] =
+              (double.parse(portfolio[order.code]!['qty']) +
+                      double.parse(order.qty))
+                  .toString();
+          portfolio[order.code]!['total'] =
+              (double.parse(portfolio[order.code]!['total']) +
+                      double.parse(order.total))
+                  .toString();
+        } else {
+          portfolio[order.code]!['qty'] =
+              (double.parse(portfolio[order.code]!['qty']) -
+                      double.parse(order.qty))
+                  .toString();
+          portfolio[order.code]!['total'] =
+              (double.parse(portfolio[order.code]!['total']) -
+                      double.parse(order.total))
+                  .toString();
+        }
       } else {
         portfolio[order.code] = {
           'qty': order.qty,

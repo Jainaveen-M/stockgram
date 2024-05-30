@@ -8,8 +8,6 @@ import 'package:stockgram/presentation/screens/auth_screen.dart';
 import 'package:stockgram/presentation/screens/market.dart';
 import 'package:stockgram/presentation/screens/order_history.dart';
 import 'package:stockgram/presentation/screens/portfolio.dart';
-import 'package:stockgram/util/localstorage.dart';
-import 'package:stockgram/util/service_locator.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -24,7 +22,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Color unselectedColor = Colors.grey;
   @override
   void initState() {
-    currentTab = 1;
+    currentTab = 0;
     tabController = TabController(length: 3, vsync: this, initialIndex: 1);
     super.initState();
   }
