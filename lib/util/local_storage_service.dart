@@ -1,8 +1,8 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-abstract class DbHelper {
-  DbHelper._internal();
+abstract class DatabaseHelper {
+  DatabaseHelper._internal();
   Future<void> onCreate(Database db, int version);
   Future<int> insert(Map<String, dynamic> row);
   Future<List<Map<String, dynamic>>> queryAllRows();
@@ -12,7 +12,7 @@ abstract class DbHelper {
   Future<List<Map<String, dynamic>>> queryLatestRecord();
 }
 
-class TradeOrderDB extends DbHelper {
+class TradeOrderDB extends DatabaseHelper {
   TradeOrderDB._internal() : super._internal();
   static final TradeOrderDB _instance = TradeOrderDB._internal();
 
@@ -110,7 +110,7 @@ class TradeOrderDB extends DbHelper {
   }
 }
 
-class BotOrderDB extends DbHelper {
+class BotOrderDB extends DatabaseHelper {
   BotOrderDB._internal() : super._internal();
   static final BotOrderDB _instance = BotOrderDB._internal();
 

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/orderbook/orderbook_bloc.dart';
-import 'package:stockgram/socket/socket.dart';
+import 'package:stockgram/util/socket.dart';
 
 class OrderBook extends StatefulWidget {
   final String code;

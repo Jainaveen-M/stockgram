@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stockgram/bloc/market/market_bloc.dart';
 import 'package:stockgram/data/models/stock.dart';
 import 'package:stockgram/presentation/screens/buy_sell_popup.dart';
-import 'package:stockgram/socket/socket.dart';
+import 'package:stockgram/util/socket.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Market extends StatefulWidget {
