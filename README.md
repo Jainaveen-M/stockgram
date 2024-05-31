@@ -35,4 +35,29 @@ Requirements Archived:-
 Screenshots
 
 1. Loginscreen
-![alt text](https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/login.png?raw=true)
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/login.png"/>
+
+2. Signup
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/signup.png"/>
+
+3. Market
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/market.png"/>
+
+4. Buy Form
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/buy.png"/>
+
+5. Sell Form
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/sell.png"/>
+
+6. Order History
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/history.png"/>
+
+7. Portfolio
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/portfolio.png"/>
+
+8. Bot Trading 
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/bot1.png"/>
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/bot.png"/>
+
+9. Logout
+<img height="600" src="https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/logout.png"/>
