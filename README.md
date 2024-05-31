@@ -29,3 +29,10 @@ Requirements Archived:-
     - trade history
     - portfolio
     - bot trading
+
+
+
+Screenshots
+
+1. Loginscreen
+![alt text](https://github.com/Jainaveen-M/stockgram/blob/main/screenshots/login.png?raw=true)
