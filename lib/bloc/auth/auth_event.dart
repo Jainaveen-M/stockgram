@@ -20,6 +20,7 @@ class AuthSignupEvent extends AuthEvent {
   });
 }
 
+
 class CheckSession extends AuthEvent {}
 
 class ShowSignupWidgetEvent extends AuthEvent {}

@@ -11,6 +11,14 @@ class AuthLoginSuccess extends AuthState {
   AuthLoginSuccess({
     required this.email,
   });
+
+  AuthLoginSuccess copyWith({
+    String? email,
+  }) {
+    return AuthLoginSuccess(
+      email: email ?? this.email,
+    );
+  }
 }
 
 class AuthLoginFailed extends AuthState {

@@ -40,12 +40,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(
             AuthLoginFailed(message: "Something went wrong. Please try again."),
           );
+          emit(ShowLoginScreen());
         }
       }
     } catch (e) {
       emit(
         AuthLoginFailed(message: "Something went wrong. Please try again."),
       );
+      emit(ShowLoginScreen());
     }
   }
 
@@ -105,6 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _checkSession(
       CheckSession event, Emitter<AuthState> emit) async {
+    print("++++++++++++++ check session called");
     emit(AuthLoading());
     String? t = await serviceLocator<SessionStorage>().readString("session");
     log("Email in session : ${t}");

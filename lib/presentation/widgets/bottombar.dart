@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stockgram/presentation/screens/algo_trading.dart';
 import 'package:stockgram/presentation/screens/home.dart';
+import 'package:stockgram/presentation/screens/profile.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -20,6 +21,7 @@ class _BottomBarState extends State<BottomBar> {
   static const List<Widget> _pages = <Widget>[
     Home(),
     AlgoTrading(),
+    ProfileScreen()
   ];
 
   @override
@@ -35,6 +37,10 @@ class _BottomBarState extends State<BottomBar> {
             BottomNavigationBarItem(
               icon: Icon(Icons.whatshot_outlined),
               label: 'Bot Trading',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
             ),
           ],
           currentIndex: _selectedIndex, //New

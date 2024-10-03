@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stockgram/bloc/app/app_bloc.dart';
 import 'package:stockgram/bloc/portfolio/portfolio_bloc.dart';
 import 'package:stockgram/data/models/holding.dart';
 
@@ -31,6 +32,12 @@ class _PortFolioState extends State<PortFolio> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<AppBloc>(context)
+                              .add(AppLogoutEvent());
+                        },
+                        child: Text("Logout")),
                     const Text(
                       "Total Invested",
                       style: TextStyle(

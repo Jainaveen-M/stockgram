@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stockgram/bloc/auth/auth_bloc.dart';
@@ -8,16 +10,18 @@ import 'package:stockgram/util/toast.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const AuthScreen());
+  }
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  AuthBloc authBloc = AuthBloc();
   @override
   void initState() {
-    authBloc.add(CheckSession());
+    BlocProvider.of<AuthBloc>(context).add(CheckSession());
     super.initState();
   }
 
@@ -39,39 +43,43 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
             ),
-            BlocConsumer<AuthBloc, AuthState>(
-              bloc: authBloc,
-              buildWhen: (previous, current) => current is! AuthLoginFailed,
-              listenWhen: (previous, current) =>
-                  current is AuthLoginFailed || current is AuthLoginSuccess,
-              listener: (context, state) {
-                if (state is AuthLoginSuccess) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BottomBar(),
-                    ),
+            BlocProvider.value(
+              value: BlocProvider.of<AuthBloc>(context),
+              child: BlocConsumer<AuthBloc, AuthState>(
+                bloc: BlocProvider.of<AuthBloc>(context),
+                buildWhen: (previous, current) => current is! AuthLoginFailed,
+                listenWhen: (previous, current) =>
+                    current is AuthLoginFailed || current is AuthLoginSuccess,
+                listener: (context, state) {
+                  if (state is AuthLoginSuccess) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomBar(),
+                      ),
+                    );
+                  }
+                  if (state is AuthLoginFailed) {
+                    CustomToast.showErroMessage(state.message);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ShowSignupScreen) {
+                    return SignupWidget(
+                      authBloc: BlocProvider.of<AuthBloc>(context),
+                    );
+                  }
+                  if (state is ShowLoginScreen) {
+                    return LoginWidget(
+                      authBloc: BlocProvider.of<AuthBloc>(context),
+                    );
+                  }
+
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                }
-                if (state is AuthLoginFailed) {
-                  CustomToast.showErroMessage(state.message);
-                }
-              },
-              builder: (context, state) {
-                if (state is ShowSignupScreen) {
-                  return SignupWidget(
-                    authBloc: authBloc,
-                  );
-                }
-                if (state is ShowLoginScreen) {
-                  return LoginWidget(
-                    authBloc: authBloc,
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
+                },
+              ),
             ),
             const SizedBox(),
           ],
